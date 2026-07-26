@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting Started with freeCodeCamp — An Accessible Guide for New Coders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0A23; --ink-soft:#23233B; --gold:#FFBF00; --green:#0A6E4B;
+    --paper:#ffffff; --surface:#F7F8FA; --surface-2:#EDEFF4; --border:#E1E3EB;
+    --amber-bg:#FFF6DE; --amber-line:#E0A100;
+    --green-bg:#E8F5EE; --a11y-bg:#EAEEFB; --a11y-line:#2440B8;
+    --focus:#0B5FFF;
+    --measure:68ch;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0; background:var(--paper); color:var(--ink-soft);
+    font-family:"Public Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:1.08rem; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  /* skip link */
+  .skip{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff;
+    padding:.7rem 1.1rem; border-radius:0 0 10px 0; z-index:50; font-weight:700;}
+  .skip:focus{left:0}
+  a{color:#0a5a3c; text-underline-offset:3px; text-decoration-thickness:1.5px}
+  a:hover{color:#073d29}
+  :focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-radius:4px}
+
+  /* header */
+  header.site{background:var(--ink); color:#fff; padding:1.2rem clamp(1rem,4vw,2.4rem)}
+  header.site .brand{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap}
+  header.site .mark{font-family:"JetBrains Mono",monospace; color:var(--gold); font-weight:600; font-size:.95rem; letter-spacing:.02em}
+  header.site .kicker{color:#AEB4D6; font-size:.9rem}
+
+  /* layout */
+  .wrap{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:250px minmax(0,1fr); gap:clamp(1.4rem,4vw,3rem); padding:clamp(1.4rem,4vw,2.6rem) clamp(1rem,4vw,2.4rem)}
+  @media (max-width:820px){ .wrap{grid-template-columns:1fr; gap:1rem} }
+
+  /* toc */
+  aside.toc{align-self:start; position:sticky; top:1rem}
+  @media (max-width:820px){ aside.toc{position:static} }
+  .toc nav{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.1rem}
+  .toc .toc-title{font-family:"Bricolage Grotesque"; font-weight:700; font-size:.82rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink); margin:.1rem 0 .7rem}
+  .toc ol{list-style:none; margin:0; padding:0}
+  .toc li{margin:.15rem 0}
+  .toc a{display:flex; gap:.55rem; text-decoration:none; color:var(--ink-soft); font-size:.96rem; padding:.28rem .3rem; border-radius:8px}
+  .toc a .n, .toc-m a .n{font-family:"JetBrains Mono",monospace; font-size:.78rem; color:var(--green); font-weight:600; min-width:1.6em; flex:none}
+  .toc a:hover{background:var(--surface-2); color:var(--ink)}
+  details.toc-m{display:none}
+  @media (max-width:820px){
+    .toc nav{display:none}
+    details.toc-m{display:block; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:.4rem .9rem; margin-bottom:.4rem}
+    details.toc-m summary{font-family:"Bricolage Grotesque"; font-weight:700; cursor:pointer; padding:.5rem 0; color:var(--ink)}
+    details.toc-m ol{list-style:none; margin:.2rem 0 .6rem; padding-left:0}
+    details.toc-m a{display:flex; gap:.5rem}
+    details.toc-m a{color:var(--ink-soft)}
+  }
+
+  /* main */
+  main{min-width:0}
+  main :is(p,li){max-width:var(--measure)}
+  .hero{border:1px solid var(--border); border-radius:var(--radius); background:
+      radial-gradient(120% 140% at 100% 0%, #12123A 0%, var(--ink) 55%); color:#fff;
+      padding:clamp(1.6rem,4vw,2.6rem)}
+  .hero .eyebrow{font-family:"JetBrains Mono",monospace; color:var(--gold); font-size:.85rem; letter-spacing:.03em; margin:0 0 .7rem}
+  .hero h1{font-family:"Bricolage Grotesque"; font-weight:800; line-height:1.05;
+     font-size:clamp(2rem,5vw,3.1rem); margin:.1rem 0 .6rem; color:#fff; max-width:none}
+  .hero p.lead{font-size:clamp(1.05rem,2.4vw,1.25rem); color:#DDE1F2; max-width:60ch; margin:.2rem 0 1.2rem}
+  .chips{display:flex; flex-wrap:wrap; gap:.55rem; margin:0; padding:0; list-style:none}
+  .chips li{background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.16);
+     color:#fff; padding:.4rem .8rem; border-radius:999px; font-size:.92rem; max-width:none}
+  .chips li b{color:var(--gold); font-weight:700}
+
+  h2.sec{font-family:"Bricolage Grotesque"; font-weight:800; color:var(--ink);
+     font-size:clamp(1.5rem,3.4vw,2rem); line-height:1.15; margin:2.6rem 0 .3rem; scroll-margin-top:1rem}
+  h2.sec .num{font-family:"JetBrains Mono",monospace; font-size:.9rem; color:var(--green); display:block; margin-bottom:.2rem; font-weight:600}
+  h3{font-family:"Bricolage Grotesque"; font-weight:700; color:var(--ink); font-size:1.15rem; margin:1.6rem 0 .3rem}
+  section{border-top:1px solid var(--border); padding-top:.4rem}
+  section:first-of-type{border-top:none}
+
+  /* callouts */
+  .note{border:1px solid var(--border); border-left-width:5px; border-radius:10px;
+     padding:.85rem 1.05rem; margin:1.1rem 0; background:var(--surface); max-width:var(--measure)}
+  .note .lbl{display:inline-flex; align-items:center; gap:.4rem; font-family:"Bricolage Grotesque";
+     font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; margin-bottom:.15rem}
+  .note p{margin:.2rem 0}
+  .note--do{background:var(--green-bg); border-left-color:var(--green)} .note--do .lbl{color:var(--green)}
+  .note--a11y{background:var(--a11y-bg); border-left-color:var(--a11y-line)} .note--a11y .lbl{color:var(--a11y-line)}
+  .note--heads{background:var(--amber-bg); border-left-color:var(--amber-line)} .note--heads .lbl{color:#7a5800}
+  .note .ic{width:1.05em; height:1.05em; flex:none}
+
+  /* steps */
+  ol.steps{counter-reset:s; list-style:none; padding:0; margin:1rem 0}
+  ol.steps>li{counter-increment:s; position:relative; padding:.15rem 0 .9rem 2.6rem; max-width:var(--measure)}
+  ol.steps>li::before{content:counter(s); position:absolute; left:0; top:0;
+     width:1.9rem; height:1.9rem; background:var(--ink); color:var(--gold);
+     font-family:"JetBrains Mono",monospace; font-weight:600; border-radius:50%;
+     display:grid; place-items:center; font-size:.95rem}
+  ol.steps>li b{color:var(--ink)}
+
+  /* goal grid */
+  .goals{display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; margin:1.1rem 0}
+  @media (max-width:620px){ .goals{grid-template-columns:1fr} }
+  .goal{border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; background:var(--paper)}
+  .goal .q{font-family:"Bricolage Grotesque"; font-weight:700; color:var(--ink); font-size:1.02rem; display:block; margin-bottom:.25rem}
+  .goal .q .arrow{color:var(--green)}
+  .goal p{margin:.2rem 0 0; font-size:.98rem; max-width:none}
+
+  figure{margin:1.4rem 0; max-width:var(--measure)}
+  figure svg{display:block; width:100%; height:auto; border:1px solid var(--border); border-radius:12px; background:var(--surface)}
+  figure img{display:block; width:100%; height:auto; border:1px solid var(--border); border-radius:12px}
+  figcaption{font-size:.9rem; color:#54566a; margin-top:.5rem}
+
+  /* screenshot placeholder */
+  .shot{border:2px dashed #B9BDCB; border-radius:12px; background:repeating-linear-gradient(45deg,#F5F6F9,#F5F6F9 12px,#F0F1F5 12px,#F0F1F5 24px);
+     padding:1.2rem 1.1rem; margin:1.2rem 0; max-width:var(--measure)}
+  .shot .tag{display:inline-block; font-family:"JetBrains Mono",monospace; font-size:.74rem; font-weight:600;
+     background:var(--ink); color:#fff; padding:.2rem .55rem; border-radius:6px; margin-bottom:.5rem}
+  .shot b{color:var(--ink)}
+  .shot .alt{font-size:.9rem; color:#54566a; margin-top:.35rem}
+
+  table{border-collapse:collapse; width:100%; max-width:var(--measure); margin:1.1rem 0; font-size:.98rem}
+  caption{text-align:left; font-family:"Bricolage Grotesque"; font-weight:700; color:var(--ink); margin-bottom:.4rem}
+  th,td{border:1px solid var(--border); padding:.55rem .7rem; text-align:left; vertical-align:top}
+  thead th{background:var(--ink); color:#fff; font-weight:700}
+  tbody tr:nth-child(even){background:var(--surface)}
+  kbd{font-family:"JetBrains Mono",monospace; font-size:.82em; background:#fff; border:1px solid #C7CAD6;
+     border-bottom-width:2px; border-radius:6px; padding:.05rem .4rem}
+
+  .learn{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem; margin:1.1rem 0; padding:0; list-style:none}
+  @media (max-width:620px){ .learn{grid-template-columns:1fr} }
+  .learn li{border:1px solid var(--border); border-radius:12px; padding:.9rem 1rem; background:var(--surface); max-width:none}
+  .learn b{display:block; color:var(--ink); font-family:"Bricolage Grotesque"}
+
+  footer.site{background:var(--surface); border-top:1px solid var(--border); margin-top:3rem;
+     padding:clamp(1.6rem,4vw,2.6rem) clamp(1rem,4vw,2.4rem)}
+  footer .fwrap{max-width:1180px; margin:0 auto}
+  footer h2{font-family:"Bricolage Grotesque"; color:var(--ink); font-size:1.15rem; margin:1.4rem 0 .3rem}
+  footer h2:first-child{margin-top:0}
+  footer p,footer li{max-width:var(--measure); font-size:.96rem}
+  .draftflag{background:var(--amber-bg); border:1px solid var(--amber-line); border-radius:10px; padding:.7rem 1rem; font-size:.95rem}
+  .maint{font-size:.93rem; color:#4a4c60}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="brand">
+    <span class="mark">freeCodeCamp</span>
+    <span class="kicker">· A getting-started guide for new coders</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <aside class="toc">
+    <nav aria-label="On this page">
+      <p class="toc-title">On this page</p>
+      <ol>
+        <li><a href="#who"><span class="n" aria-hidden="true">—</span>Who this guide is for</a></li>
+        <li><a href="#what"><span class="n" aria-hidden="true">01</span>What is freeCodeCamp?</a></li>
+        <li><a href="#account"><span class="n" aria-hidden="true">02</span>Create your account</a></li>
+        <li><a href="#comfort"><span class="n" aria-hidden="true">03</span>Set up for comfort</a></li>
+        <li><a href="#start"><span class="n" aria-hidden="true">04</span>Where should I start?</a></li>
+        <li><a href="#editor"><span class="n" aria-hidden="true">05</span>A tour of the editor</a></li>
+        <li><a href="#first"><span class="n" aria-hidden="true">06</span>Your first challenge</a></li>
+        <li><a href="#stuck"><span class="n" aria-hidden="true">07</span>When you get stuck</a></li>
+        <li><a href="#other"><span class="n" aria-hidden="true">08</span>Other ways to learn</a></li>
+        <li><a href="#reference"><span class="n" aria-hidden="true">09</span>Quick reference</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <main id="main">
+    <div class="hero">
+      <p class="eyebrow">New learner guide · read this first</p>
+      <h1>Getting started, one calm step at a time</h1>
+      <p class="lead">A friendly, accessible guide to your first day learning to code on freeCodeCamp. No experience needed.</p>
+      <ul class="chips">
+        <li><b>For</b> total beginners</li>
+        <li>Works with a <b>keyboard</b> or <b>screen reader</b></li>
+        <li>Plain, simple English</li>
+      </ul>
+    </div>
+
+    <details class="toc-m">
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#who"><span class="n" aria-hidden="true">—</span>Who this guide is for</a></li>
+        <li><a href="#what"><span class="n" aria-hidden="true">01</span>What is freeCodeCamp?</a></li>
+        <li><a href="#account"><span class="n" aria-hidden="true">02</span>Create your account</a></li>
+        <li><a href="#comfort"><span class="n" aria-hidden="true">03</span>Set up for comfort</a></li>
+        <li><a href="#start"><span class="n" aria-hidden="true">04</span>Where should I start?</a></li>
+        <li><a href="#editor"><span class="n" aria-hidden="true">05</span>A tour of the editor</a></li>
+        <li><a href="#first"><span class="n" aria-hidden="true">06</span>Your first challenge</a></li>
+        <li><a href="#stuck"><span class="n" aria-hidden="true">07</span>When you get stuck</a></li>
+        <li><a href="#other"><span class="n" aria-hidden="true">08</span>Other ways to learn</a></li>
+        <li><a href="#reference"><span class="n" aria-hidden="true">09</span>Quick reference</a></li>
+      </ol>
+    </details>
+
+    <section id="who">
+      <h2 class="sec"><span class="num">Start here</span>Who this guide is for</h2>
+      <p>This guide is for you if you are <b>brand new to coding</b> and about to open freeCodeCamp for the first time. You do not need any experience at all.</p>
+      <p>It is written with extra care for people who <b>use a keyboard instead of a mouse</b>, people who <b>use a screen reader</b>, and people who <b>read English as a second language</b>. The steps are short and the words are plain.</p>
+      <p><b>What you will have by the end:</b> an account, a comfortable setup, a clear idea of where to begin, and your first lines of code written.</p>
+      <div class="note note--do">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M8 13.2 4.8 10l-1.3 1.3L8 15.8l8-8-1.3-1.3z"/></svg>How to use this guide</span>
+        <p>Read top to bottom on your first day, or jump to a section using the menu. Take breaks. Nothing here is a race.</p>
+      </div>
+    </section>
+
+    <section id="what">
+      <h2 class="sec"><span class="num">01</span>What is freeCodeCamp?</h2>
+      <p>freeCodeCamp is a <b>free, non-profit website where you learn to code by doing</b>. You read a short instruction, write a little code, and the site checks your work right away. There is no cost, and there never will be.</p>
+      <p>You learn in small steps called <b>challenges</b>. Each one teaches a tiny piece. Over time, the tiny pieces add up to real skills.</p>
+    </section>
+
+    <section id="account">
+      <h2 class="sec"><span class="num">02</span>Create your account</h2>
+      <ol class="steps">
+        <li>Go to <b>freecodecamp.org</b> and select <b>Sign in</b>.</li>
+        <li>Choose how you want to sign up. You can use an <b>email address</b>, or sign in with a service you already trust. Pick whichever feels safe to you.</li>
+        <li>If you use email, open the message freeCodeCamp sends and select the link inside to confirm.</li>
+        <li>You are in. Your progress now saves automatically as you go.</li>
+      </ol>
+      <figure>
+        <img src="screenshots/sign-in.png" alt="The freeCodeCamp sign-in page, showing the option to sign in with email or another account.">
+        <figcaption>The freeCodeCamp sign-in page.</figcaption>
+      </figure>
+    </section>
+
+    <section id="comfort">
+      <h2 class="sec"><span class="num">03</span>Set up for comfort</h2>
+      <p>Before you start coding, take two minutes to make the site comfortable for <em>you</em>. This matters most if you use assistive technology, so it comes early.</p>
+
+      <h3>Make the text easy to read</h3>
+      <p>Choose a light or dark theme in <b>Settings</b> — whichever is easier on your eyes. To make everything bigger, zoom your whole browser with <kbd>Ctrl</kbd> <kbd>+</kbd> (on a Mac, <kbd>Cmd</kbd> <kbd>+</kbd>). The text grows cleanly without breaking the page.</p>
+
+      <div class="note note--a11y">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 4v2c-2 .3-3.4.5-4 .6V18h-2v-5h-2v5H7V8.6C6.4 8.5 5 8.3 3 8V6c2.3.4 4.7.6 7 .6S14.7 6.4 17 6Z"/></svg>If you use a keyboard or screen reader</span>
+        <p>You move around the page with <kbd>Tab</kbd> (and <kbd>Shift</kbd> <kbd>Tab</kbd> to go back), and into the code box when you are ready to type.</p>
+        <p><b>One thing to know:</b> once your cursor is <em>inside</em> the code box, <kbd>Tab</kbd> adds spacing instead of moving on. To get back out to the rest of the page, press <kbd>Esc</kbd> first, then <kbd>Tab</kbd>.</p>
+      </div>
+
+      <div class="note note--heads">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Screen-reader users, one honest note</span>
+        <p>The instructions and your own code read well. The little <b>live preview</b> of your webpage is not announced yet. Use the written instructions and the test messages to know what your code did — they tell you the same thing in words.</p>
+      </div>
+    </section>
+
+    <section id="start">
+      <h2 class="sec"><span class="num">04</span>Where should I start?</h2>
+      <p>freeCodeCamp has a <em>lot</em> of courses. On day one, that can feel like standing in front of a huge menu. Here is the secret: <b>you do not have to pick the perfect one.</b> Just pick a starting point that matches what you want, and begin. You can always switch later.</p>
+
+      <figure>
+        <svg viewBox="0 0 720 300" role="img" aria-label="A simple decision map. Start by asking: what do you want to do? Four answers each point to a starting place. Try coding points to HTML and CSS basics. Build websites points to the web development path. Python or data points to the Python course. Learn in another language points to English for Developers.">
+          <title>Choosing where to start on freeCodeCamp</title>
+          <rect x="270" y="14" width="180" height="52" rx="12" fill="#0A0A23"/>
+          <text x="360" y="38" text-anchor="middle" fill="#FFBF00" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">What do you</text>
+          <text x="360" y="55" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">want to do?</text>
+          <g stroke="#B9BDCB" stroke-width="2" fill="none">
+            <path d="M300 66 C220 110 140 120 110 150"/>
+            <path d="M340 66 C320 110 300 120 290 150"/>
+            <path d="M380 66 C400 110 420 120 435 150"/>
+            <path d="M420 66 C500 110 590 120 615 150"/>
+          </g>
+          <g font-family="Public Sans, sans-serif">
+            <rect x="20" y="150" width="180" height="120" rx="12" fill="#E8F5EE" stroke="#0A6E4B"/>
+            <text x="110" y="178" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">Just try coding</text>
+            <text x="110" y="205" text-anchor="middle" fill="#23233B" font-size="12.5">Start with the</text>
+            <text x="110" y="223" text-anchor="middle" fill="#23233B" font-size="12.5">very beginning:</text>
+            <text x="110" y="241" text-anchor="middle" fill="#0A6E4B" font-size="12.5" font-weight="700">HTML &amp; CSS</text>
+
+            <rect x="212" y="150" width="176" height="120" rx="12" fill="#F7F8FA" stroke="#E1E3EB"/>
+            <text x="300" y="178" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">Build websites</text>
+            <text x="300" y="205" text-anchor="middle" fill="#23233B" font-size="12.5">Follow the web</text>
+            <text x="300" y="223" text-anchor="middle" fill="#23233B" font-size="12.5">development path</text>
+            <text x="300" y="241" text-anchor="middle" fill="#0A6E4B" font-size="12.5" font-weight="700">Full Stack</text>
+
+            <rect x="400" y="150" width="176" height="120" rx="12" fill="#F7F8FA" stroke="#E1E3EB"/>
+            <text x="488" y="178" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">Python / data</text>
+            <text x="488" y="205" text-anchor="middle" fill="#23233B" font-size="12.5">Start with the</text>
+            <text x="488" y="223" text-anchor="middle" fill="#23233B" font-size="12.5">Python course</text>
+            <text x="488" y="241" text-anchor="middle" fill="#0A6E4B" font-size="12.5" font-weight="700">Sci. Computing</text>
+
+            <rect x="588" y="150" width="112" height="120" rx="12" fill="#F7F8FA" stroke="#E1E3EB"/>
+            <text x="644" y="178" text-anchor="middle" fill="#0A0A23" font-size="13.5" font-weight="700">In another</text>
+            <text x="644" y="195" text-anchor="middle" fill="#0A0A23" font-size="13.5" font-weight="700">language</text>
+            <text x="644" y="221" text-anchor="middle" fill="#23233B" font-size="12">English for</text>
+            <text x="644" y="239" text-anchor="middle" fill="#0A6E4B" font-size="12" font-weight="700">Developers</text>
+          </g>
+        </svg>
+        <figcaption>The same four starting points are written out below, so you can use either the map or the text.</figcaption>
+      </figure>
+
+      <div class="goals">
+        <div class="goal"><span class="q">"I just want to try coding" <span class="arrow">→</span></span><p>Start at the very beginning of the curriculum, with <b>HTML and CSS</b>. It is the gentlest on-ramp, and you see results on screen fast.</p></div>
+        <div class="goal"><span class="q">"I want to build websites or get a web job" <span class="arrow">→</span></span><p>Follow the <b>web development path</b>. You will learn HTML, CSS, then JavaScript. These are the core skills employers would look for.</p></div>
+        <div class="goal"><span class="q">"I want Python, data, or AI" <span class="arrow">→</span></span><p>Begin with the <b>Python course</b> (Scientific Computing with Python). A fuller data-science path is on the way.</p></div>
+        <div class="goal"><span class="q">"English is not my first language" <span class="arrow">→</span></span><p>Try <b>English for Developers</b>. It teaches coding words and English together, so you build both at once.</p></div>
+      </div>
+
+      <div class="note note--heads">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Heads up: two menus</span>
+        <p>freeCodeCamp is updating its courses. You may see a newer <b>Certified Full Stack Developer</b> path sitting next to the older certifications. Both teach great skills. On your first day it matters far less which you choose, and far more that you simply <b>start</b>.</p>
+      </div>
+    </section>
+
+    <section id="editor">
+      <h2 class="sec"><span class="num">05</span>A tour of the editor</h2>
+      <p>When you open a challenge, the screen is split into a few parts. Once you know what each part is for, the rest feels easy.</p>
+
+      <figure>
+        <svg viewBox="0 0 720 260" role="img" aria-label="The challenge screen has three parts. On the left is the instructions panel, which tells you what to do. In the middle is the code editor, where you type. On the right is the preview and console, which shows what your code makes and any messages.">
+          <title>The three parts of a freeCodeCamp challenge screen</title>
+          <rect x="14" y="14" width="692" height="232" rx="12" fill="#ffffff" stroke="#E1E3EB"/>
+          <rect x="14" y="14" width="692" height="30" rx="12" fill="#0A0A23"/>
+          <rect x="14" y="30" width="692" height="14" fill="#0A0A23"/>
+          <circle cx="34" cy="29" r="5" fill="#FF5F56"/><circle cx="50" cy="29" r="5" fill="#FFBD2E"/><circle cx="66" cy="29" r="5" fill="#27C93F"/>
+          <g font-family="Public Sans, sans-serif">
+            <rect x="30" y="60" width="200" height="170" rx="10" fill="#EAEEFB" stroke="#2440B8"/>
+            <text x="130" y="88" text-anchor="middle" fill="#2440B8" font-size="12" font-family="JetBrains Mono, monospace" font-weight="600">1 · INSTRUCTIONS</text>
+            <text x="130" y="118" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">What to do</text>
+            <text x="130" y="146" text-anchor="middle" fill="#23233B" font-size="12">Read the short</text>
+            <text x="130" y="163" text-anchor="middle" fill="#23233B" font-size="12">task here first.</text>
+
+            <rect x="248" y="60" width="200" height="170" rx="10" fill="#F7F8FA" stroke="#0A0A23"/>
+            <text x="348" y="88" text-anchor="middle" fill="#0A6E4B" font-size="12" font-family="JetBrains Mono, monospace" font-weight="600">2 · CODE EDITOR</text>
+            <text x="348" y="118" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">Where you type</text>
+            <text x="348" y="146" text-anchor="middle" fill="#23233B" font-size="12">You write your</text>
+            <text x="348" y="163" text-anchor="middle" fill="#23233B" font-size="12">code in here.</text>
+
+            <rect x="466" y="60" width="224" height="170" rx="10" fill="#F7F8FA" stroke="#E1E3EB"/>
+            <text x="578" y="88" text-anchor="middle" fill="#7a5800" font-size="12" font-family="JetBrains Mono, monospace" font-weight="600">3 · PREVIEW / CONSOLE</text>
+            <text x="578" y="118" text-anchor="middle" fill="#0A0A23" font-size="14" font-weight="700">What it makes</text>
+            <text x="578" y="146" text-anchor="middle" fill="#23233B" font-size="12">See your result</text>
+            <text x="578" y="163" text-anchor="middle" fill="#23233B" font-size="12">and any messages.</text>
+          </g>
+        </svg>
+        <figcaption>The three parts of a challenge: instructions, the code editor, and the preview or console.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/editor.png" alt="A freeCodeCamp challenge, with the instructions on the left, the code editor in the middle, and a live preview on the right.">
+        <figcaption>A real challenge open in the editor — the same three parts as the diagram above.</figcaption>
+      </figure>
+    </section>
+
+    <section id="first">
+      <h2 class="sec"><span class="num">06</span>Your first challenge, step by step</h2>
+      <ol class="steps">
+        <li><b>Read the instruction</b> at the top or left. It is usually one small task.</li>
+        <li><b>Move into the code box.</b> Click it, or press <kbd>Tab</kbd> until you land inside.</li>
+        <li><b>Start writing code!</b> Follow the instructions and attempt to complete the challenge.</li>
+        <li><b>Run the check.</b> Select the <b>Check Your Code</b> button, or press <kbd>Ctrl</kbd> <kbd>Enter</kbd> (<kbd>Cmd</kbd> <kbd>Enter</kbd> on Mac).</li>
+        <li><b>Read the result.</b> If it passes, you move on. If not, the message tells you which test failed — read it and try again.</li>
+        <li><b>Go to the next challenge</b> and repeat! </li>
+      </ol>
+      <div class="note note--do">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M8 13.2 4.8 10l-1.3 1.3L8 15.8l8-8-1.3-1.3z"/></svg>You cannot break anything</span>
+        <p>If your code gets messy or confusing, use <b>Reset</b> to bring back the starting code and try the step fresh. Mistakes are part of learning!</p>
+      </div>
+      <div class="note note--heads">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Reaching Reset with a keyboard — a known snag</span>
+        <p>The <b>Reset</b> button comes <em>after</em> the code editor in the tab order, and tabbing forward dead-ends inside the editor — you cannot <kbd>Tab</kbd> past it to reach Reset. Pressing <kbd>Esc</kbd> then <kbd>Tab</kbd> does free you from the editor, but it sends you back to the <em>start</em> of the page, not on to Reset. So with the keyboard alone, the Reset button cannot be reached.</p>
+        <p><b>What to do instead:</b> undo your changes. Press <kbd>Ctrl</kbd> <kbd>Z</kbd> (<kbd>Cmd</kbd> <kbd>Z</kbd> on Mac) and keep pressing/hold until your code is back to how it started.</p>
+      </div>
+    </section>
+
+    <section id="stuck">
+      <h2 class="sec"><span class="num">07</span>When you get stuck</h2>
+      <p>Everyone gets stuck. It is normal, and it is not a sign you are bad at this. Here is what to do, in order:</p>
+      <ol class="steps">
+        <li><b>Read the failing message again.</b> It usually names exactly where your code might have failed.</li>
+        <li><b>Reset the step</b> if your code drifted far from where it started.</li>
+        <li><b>Search the forum.</b> Odds are someone asked your exact question already.</li>
+        <li><b>Ask for help</b> on the forum or Discord. Say what you tried and what happened. This gives anyone helping you better context on what you need help with!</li>
+      </ol>
+    </section>
+
+    <section id="other">
+      <h2 class="sec"><span class="num">08</span>Other ways to learn</h2>
+      <p>Everyone learns differently, and the coding challenges are just one way in. If another format makes things click, try these — they cover the same skills!</p>
+      <ul class="learn">
+        <li><b>Watch</b> Full video courses on the freeCodeCamp YouTube channel. These are great if you like seeing someone build alongside you.</li>
+        <li><b>Listen</b> The freeCodeCamp Podcast, for stories and advice you can play on the go.</li>
+        <li><b>Read articles</b> freeCodeCamp News has thousands of written tutorials when you want to go deeper on one specific topic.</li>
+        <li><b>Learn with people</b> The forum and Discord let you ask questions and see how others solved the same steps.</li>
+      </ul>
+      <div class="note note--a11y">
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 4v2c-2 .3-3.4.5-4 .6V18h-2v-5h-2v5H7V8.6C6.4 8.5 5 8.3 3 8V6c2.3.4 4.7.6 7 .6S14.7 6.4 17 6Z"/></svg>Pick what fits you</span>
+        <p>You can mix these freely. Many people watch a video to understand an idea, then return to the challenges to practice it. Use whatever helps it stick.</p>
+      </div>
+    </section>
+
+    <section id="reference">
+      <h2 class="sec"><span class="num">09</span>Quick reference</h2>
+      <table>
+        <caption>Handy keyboard actions</caption>
+        <thead><tr><th scope="col">To do this</th><th scope="col">Press</th></tr></thead>
+        <tbody>
+          <tr><td>Run the tests on your code</td><td><kbd>Ctrl</kbd> <kbd>Enter</kbd> &nbsp;/&nbsp; <kbd>Cmd</kbd> <kbd>Enter</kbd></td></tr>
+          <tr><td>Step out of the code box</td><td><kbd>Esc</kbd>, then <kbd>Tab</kbd></td></tr>
+          <tr><td>Make everything bigger</td><td><kbd>Ctrl</kbd> <kbd>+</kbd> &nbsp;/&nbsp; <kbd>Cmd</kbd> <kbd>+</kbd></td></tr>
+          <tr><td>Move forward / back on the page</td><td><kbd>Tab</kbd> &nbsp;/&nbsp; <kbd>Shift</kbd> <kbd>Tab</kbd></td></tr>
+        </tbody>
+      </table>
+      <p class="maint">Shortcuts can change as the site updates. If one does not work, check the editor's settings menu for the current keys.</p>
+    </section>
+  </main>
+</div>
+</body>
+</html>
