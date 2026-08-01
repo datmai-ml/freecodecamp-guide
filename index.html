@@ -133,6 +133,7 @@
   tbody tr:nth-child(even){background:var(--surface)}
   kbd{font-family:"JetBrains Mono",monospace; font-size:.82em; background:#fff; border:1px solid #C7CAD6;
      border-bottom-width:2px; border-radius:6px; padding:.05rem .4rem}
+  code{font-family:"JetBrains Mono",monospace; font-size:.88em; background:var(--surface-2); border-radius:5px; padding:.05rem .35rem}
 
   .learn{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem; margin:1.1rem 0; padding:0; list-style:none}
   @media (max-width:620px){ .learn{grid-template-columns:1fr} }
@@ -147,6 +148,7 @@
   footer p,footer li{max-width:var(--measure); font-size:.96rem}
   .draftflag{background:var(--amber-bg); border:1px solid var(--amber-line); border-radius:10px; padding:.7rem 1rem; font-size:.95rem}
   .maint{font-size:.93rem; color:#4a4c60}
+  .note-inline{color:#6a6c7e; font-weight:400; font-size:.88em}
 </style>
 </head>
 <body>
@@ -226,10 +228,11 @@
     <section id="account">
       <h2 class="sec"><span class="num">02</span>Create your account</h2>
       <ol class="steps">
-        <li>Go to <b>freecodecamp.org</b> and select <b>Sign in</b>.</li>
+        <li>Go to <a href="https://www.freecodecamp.org">freecodecamp.org</a> and select <b>Sign in</b>.</li>
         <li>Choose how you want to sign up. You can use an <b>email address</b>, or sign in with a service you already trust. Pick whichever feels safe to you.</li>
         <li>If you use email, open the message freeCodeCamp sends and select the link inside to confirm.</li>
         <li>You are in. Your progress now saves automatically as you go.</li>
+        <li>To start learning, open the <a href="https://www.freecodecamp.org/learn">curriculum</a>. This is where all the courses and challenges live — pick a course and your first challenge opens up.</li>
       </ol>
       <figure>
         <img src="screenshots/sign-in.png" alt="The freeCodeCamp sign-in page, showing the option to sign in with email or another account.">
@@ -247,7 +250,8 @@
       <div class="note note--a11y">
         <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 4v2c-2 .3-3.4.5-4 .6V18h-2v-5h-2v5H7V8.6C6.4 8.5 5 8.3 3 8V6c2.3.4 4.7.6 7 .6S14.7 6.4 17 6Z"/></svg>If you use a keyboard or screen reader</span>
         <p>You move around the page with <kbd>Tab</kbd> (and <kbd>Shift</kbd> <kbd>Tab</kbd> to go back), and into the code box when you are ready to type.</p>
-        <p><b>One thing to know:</b> once your cursor is <em>inside</em> the code box, <kbd>Tab</kbd> adds spacing instead of moving on. To get back out to the rest of the page, press <kbd>Esc</kbd> first, then <kbd>Tab</kbd>.</p>
+        <p><b>One thing to know:</b> once your cursor is <em>inside</em> the code box, <kbd>Tab</kbd> adds spacing instead of moving on.</p>
+        <p><b>To get back out:</b> press <kbd>Esc</kbd>, then <kbd>Tab</kbd>. That frees you from the code box and returns you to the rest of the page.</p>
       </div>
 
       <div class="note note--heads">
@@ -258,7 +262,7 @@
 
     <section id="start">
       <h2 class="sec"><span class="num">04</span>Where should I start?</h2>
-      <p>freeCodeCamp has a <em>lot</em> of courses. On day one, that can feel like standing in front of a huge menu. Here is the secret: <b>you do not have to pick the perfect one.</b> Just pick a starting point that matches what you want, and begin. You can always switch later.</p>
+      <p>freeCodeCamp has a <em>lot</em> of <a href="https://www.freecodecamp.org/learn">courses</a>. On day one, that can feel like standing in front of a huge menu. Here is the secret: <b>you do not have to pick the perfect one.</b> Just pick a starting point that matches what you want, and begin. You can always switch later.</p>
 
       <figure>
         <svg viewBox="0 0 720 300" role="img" aria-label="A simple decision map. Start by asking: what do you want to do? Four answers each point to a starting place. Try coding points to HTML and CSS basics. Build websites points to the web development path. Python or data points to the Python course. Learn in another language points to English for Developers.">
@@ -308,9 +312,11 @@
         <div class="goal"><span class="q">"English is not my first language" <span class="arrow">→</span></span><p>Try <b>English for Developers</b>. It teaches coding words and English together, so you build both at once.</p></div>
       </div>
 
+      <p>New to these words? <b>HTML</b> builds the structure of a web page — the text, images, and buttons. <b>CSS</b> styles that structure — the colors, fonts, and layout. Almost every website uses them together, which is why they make such a natural first step, and what you learn here carries over when you pick up other languages later.</p>
+
       <div class="note note--heads">
-        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Heads up: two menus</span>
-        <p>freeCodeCamp is updating its courses. You may see a newer <b>Certified Full Stack Developer</b> path sitting next to the older certifications. Both teach great skills. On your first day it matters far less which you choose, and far more that you simply <b>start</b>.</p>
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Heads up: you may see a few options</span>
+        <p>freeCodeCamp is updating its courses, so you might see more than one place to begin. Do not worry about picking the "perfect" one — they all teach real skills. What matters on your first day is simply that you <b>start</b>. You can always switch later.</p>
       </div>
     </section>
 
@@ -364,14 +370,37 @@
         <li><b>Read the result.</b> If it passes, you move on. If not, the message tells you which test failed — read it and try again.</li>
         <li><b>Go to the next challenge</b> and repeat! </li>
       </ol>
+
+      <h3>See it on a real challenge</h3>
+      <p>Here is what those steps look like on one of the very first challenges — turning the text <b>Welcome to freeCodeCamp</b> into a heading by wrapping it in an <code>h1</code> element. <a href="https://www.freecodecamp.org/learn/responsive-web-design-v9/workshop-curriculum-outline/step-2">Follow along on this challenge »</a></p>
+
+      <figure>
+        <img src="screenshots/step1-instructions.png" alt="The challenge screen. The Step 2 instructions on the left explain the h1 element, and the editor shows the starting text 'Welcome to freeCodeCamp' not yet wrapped in tags.">
+        <figcaption><b>1. Read the instructions, then find the starting code.</b> The task is to turn the plain text into a heading.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/step2-code.png" alt="The code editor now shows the text wrapped in an opening h1 tag and a closing slash-h1 tag.">
+        <figcaption><b>2. Make the change.</b> Wrap the text in an opening <code>&lt;h1&gt;</code> tag and a closing <code>&lt;/h1&gt;</code> tag.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/step3-check.png" alt="The yellow 'Check Your Code' button below the editor, ready to be selected.">
+        <figcaption><b>3. Run the tests.</b> Select <b>Check Your Code</b>, or press <kbd>Ctrl</kbd> <kbd>Enter</kbd> (<kbd>Cmd</kbd> <kbd>Enter</kbd> on Mac).</figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/step4-pass.png" alt="The success message shown after the tests pass, with a button to continue to the next step.">
+        <figcaption><b>4. It passes.</b> Continue on to the next step — you just wrote your first line of HTML.</figcaption>
+      </figure>
       <div class="note note--do">
         <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M8 13.2 4.8 10l-1.3 1.3L8 15.8l8-8-1.3-1.3z"/></svg>You cannot break anything</span>
         <p>If your code gets messy or confusing, use <b>Reset</b> to bring back the starting code and try the step fresh. Mistakes are part of learning!</p>
       </div>
       <div class="note note--heads">
-        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Reaching Reset with a keyboard — a known snag</span>
-        <p>The <b>Reset</b> button comes <em>after</em> the code editor in the tab order, and tabbing forward dead-ends inside the editor — you cannot <kbd>Tab</kbd> past it to reach Reset. Pressing <kbd>Esc</kbd> then <kbd>Tab</kbd> does free you from the editor, but it sends you back to the <em>start</em> of the page, not on to Reset. So with the keyboard alone, the Reset button cannot be reached.</p>
-        <p><b>What to do instead:</b> undo your changes. Press <kbd>Ctrl</kbd> <kbd>Z</kbd> (<kbd>Cmd</kbd> <kbd>Z</kbd> on Mac) and keep pressing/hold until your code is back to how it started.</p>
+        <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1 1 18h18L10 1Zm0 6.5c.6 0 1 .4 1 1v3a1 1 0 1 1-2 0v-3c0-.6.4-1 1-1Zm0 7.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>Restarting a step with the keyboard</span>
+        <p><b>To undo your work, press <kbd>Ctrl</kbd> <kbd>Z</kbd> (<kbd>Cmd</kbd> <kbd>Z</kbd> on Mac)</b> — hold it, or keep pressing, until your code is back to how it started.</p>
+        <p>The <b>Reset</b> button does the same thing, but it cannot be reached with the keyboard alone, so <kbd>Ctrl</kbd> <kbd>Z</kbd> is your best bet. (The <a href="#reference">Quick reference</a> explains why.)</p>
       </div>
     </section>
 
@@ -382,7 +411,7 @@
         <li><b>Read the failing message again.</b> It usually names exactly where your code might have failed.</li>
         <li><b>Reset the step</b> if your code drifted far from where it started.</li>
         <li><b>Search the forum.</b> Odds are someone asked your exact question already.</li>
-        <li><b>Ask for help</b> on the forum or Discord. Say what you tried and what happened. This gives anyone helping you better context on what you need help with!</li>
+        <li><b>Ask for help</b> on the <a href="https://forum.freecodecamp.org">forum</a> or <a href="https://discord.com/invite/freecodecamp-692816967895220344">Discord</a>. Say what you tried and what happened. This gives anyone helping you better context on what you need help with!</li>
       </ol>
     </section>
 
@@ -390,10 +419,10 @@
       <h2 class="sec"><span class="num">08</span>Other ways to learn</h2>
       <p>Everyone learns differently, and the coding challenges are just one way in. If another format makes things click, try these — they cover the same skills!</p>
       <ul class="learn">
-        <li><b>Watch</b> Full video courses on the freeCodeCamp YouTube channel. These are great if you like seeing someone build alongside you.</li>
-        <li><b>Listen</b> The freeCodeCamp Podcast, for stories and advice you can play on the go.</li>
-        <li><b>Read articles</b> freeCodeCamp News has thousands of written tutorials when you want to go deeper on one specific topic.</li>
-        <li><b>Learn with people</b> The forum and Discord let you ask questions and see how others solved the same steps.</li>
+        <li><b>Watch</b> Full video courses on the <a href="https://www.youtube.com/@freecodecamp">freeCodeCamp YouTube channel</a>. These are great if you like seeing someone build alongside you.</li>
+        <li><b>Listen</b> The <a href="https://www.freecodecamp.org/news/tag/podcast">freeCodeCamp Podcast</a>, for stories and advice you can play on the go.</li>
+        <li><b>Read articles</b> <a href="https://www.freecodecamp.org/news">freeCodeCamp News</a> has thousands of written tutorials when you want to go deeper on one specific topic.</li>
+        <li><b>Learn with people</b> The <a href="https://forum.freecodecamp.org">forum</a> and <a href="https://discord.com/invite/freecodecamp-692816967895220344">Discord</a> let you ask questions and see how others solved the same steps.</li>
       </ul>
       <div class="note note--a11y">
         <span class="lbl"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 4v2c-2 .3-3.4.5-4 .6V18h-2v-5h-2v5H7V8.6C6.4 8.5 5 8.3 3 8V6c2.3.4 4.7.6 7 .6S14.7 6.4 17 6Z"/></svg>Pick what fits you</span>
@@ -408,11 +437,13 @@
         <thead><tr><th scope="col">To do this</th><th scope="col">Press</th></tr></thead>
         <tbody>
           <tr><td>Run the tests on your code</td><td><kbd>Ctrl</kbd> <kbd>Enter</kbd> &nbsp;/&nbsp; <kbd>Cmd</kbd> <kbd>Enter</kbd></td></tr>
-          <tr><td>Step out of the code box</td><td><kbd>Esc</kbd>, then <kbd>Tab</kbd></td></tr>
+          <tr><td>Step out of the code box <span class="note-inline">— returns you to the top of the page</span></td><td><kbd>Esc</kbd>, then <kbd>Tab</kbd></td></tr>
+          <tr><td>Undo / restart a step <span class="note-inline">— the Reset button is not keyboard-reachable</span></td><td><kbd>Ctrl</kbd> <kbd>Z</kbd> &nbsp;/&nbsp; <kbd>Cmd</kbd> <kbd>Z</kbd></td></tr>
           <tr><td>Make everything bigger</td><td><kbd>Ctrl</kbd> <kbd>+</kbd> &nbsp;/&nbsp; <kbd>Cmd</kbd> <kbd>+</kbd></td></tr>
           <tr><td>Move forward / back on the page</td><td><kbd>Tab</kbd> &nbsp;/&nbsp; <kbd>Shift</kbd> <kbd>Tab</kbd></td></tr>
         </tbody>
       </table>
+      <p class="maint"><b>Why the Reset button needs a workaround:</b> it sits <em>after</em> the code editor in the tab order, so tabbing forward never lands on it, and pressing <kbd>Esc</kbd> then <kbd>Tab</kbd> jumps focus back to the top of the page instead. Until that changes, use <kbd>Ctrl</kbd> <kbd>Z</kbd> (<kbd>Cmd</kbd> <kbd>Z</kbd>) to undo back to the starting code.</p>
       <p class="maint">Shortcuts can change as the site updates. If one does not work, check the editor's settings menu for the current keys.</p>
     </section>
   </main>
